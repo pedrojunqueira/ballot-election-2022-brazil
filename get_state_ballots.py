@@ -1,4 +1,5 @@
 import json
+import concurrent.futures as cf
 
 import requests
 
@@ -34,25 +35,24 @@ states = {
             }
 
 
-headers = {
+HEADERS = {
   'Accept': 'application/json, text/plain, */*'
 }
 
-url = "https://resultados.tse.jus.br/oficial/ele2022/arquivo-urna/407/config/{uf}/{uf}-p000407-cs.json"
+URL_TEMPLATE = "https://resultados.tse.jus.br/oficial/ele2022/arquivo-urna/407/config/{uf}/{uf}-p000407-cs.json"
 
 
-for uf in states.keys():
-    url_request = url.format(uf=uf.lower())
+def get_state_ballot(state_code:str) -> None:
+    url_request = URL_TEMPLATE.format(uf=state_code.lower())
     file_name = url_request.split("/")[-1]
-    print(f"getting data for -> {uf}")
-    response = requests.request("GET", url_request, headers=headers)
+    print(f"getting data for -> {state_code}")
+    response = requests.get(url = url_request, headers = HEADERS)
     if response.status_code == 200:
         with open(f"./state_ballots/{file_name}", "w+") as fp:
             json.dump(response.json(),fp)
         print(f"saved file -> {file_name}")
     else:
-        print(f"for state {uf} request failed")
+        print(f"for state {state_code} request failed")
 
-
-
-
+with cf.ThreadPoolExecutor() as executor:
+    executor.map(get_state_ballot, states.keys())
