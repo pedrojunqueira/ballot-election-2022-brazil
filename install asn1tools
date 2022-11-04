@@ -1,0 +1,7 @@
+pip install asn1tools asn1crypto ed25519 ecdsa
+git clone https://github.com/cslashm/ECPy.git && cd ECPy && pip install
+
+
+python ./python/bu_dump.py \
+-a ./spec/bu.asn1 \
+-b "o00407-6101801570003.bu"

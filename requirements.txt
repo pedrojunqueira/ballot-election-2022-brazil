@@ -1,0 +1,16 @@
+asn1crypto==1.5.1
+asn1tools==0.164.0
+bitstruct==8.15.1
+certifi==2022.9.24
+charset-normalizer==2.1.1
+diskcache==5.4.0
+ecdsa==0.18.0
+ecpy @ file:///Users/pedrojunqueira/Desktop/code/boletin_urna/ECPy/ECPy
+ed25519==1.5
+idna==3.4
+prompt-toolkit==3.0.31
+pyparsing==3.0.9
+requests==2.28.1
+six==1.16.0
+urllib3==1.26.12
+wcwidth==0.2.5
