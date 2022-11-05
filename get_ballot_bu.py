@@ -31,7 +31,6 @@ states = {
             "SP": "São Paulo",
             "SE": "Sergipe",
             "TO": "Tocantins",
-            "DF":"Distrito Federal", 
             "ZZ":"Exterior"
             }
 

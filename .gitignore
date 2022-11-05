@@ -1,5 +1,7 @@
 .venv
 bu
+bu_decoded
 state_ballots
 .DS_Store
 ECPy
+__pycache__
