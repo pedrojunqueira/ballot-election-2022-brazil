@@ -72,6 +72,8 @@ def calculate_state_ballot_report(state_code:str)-> list:
     print("###############")
     print()
 
+    return total_ballots
+
 def get_state_ballot_codes(state_code:str)-> list:
     ballots = []
 
@@ -162,27 +164,32 @@ start_time = datetime.now()
 
 # # # download BUs from site
 
-for state_code in state_codes[5:6]:
+for state_code in state_codes[7:8]:
     try:
         print(f"processing state_code: {state_code}")
         ballots = get_state_ballot_codes(state_code)
-        batches = create_batches(80, ballots)
+        batches = create_batches(200, ballots)
         batch_count = 1
         for batch in batches:
             ballots_to_process = get_reminder_ballots(batch)
             # print(len(ballots_to_process))
             if len(ballots_to_process) > 0:
                 print(f"processing batch {batch_count}/{len(batches)} ")
-                with cf.ThreadPoolExecutor() as executor:
+                with cf.ThreadPoolExecutor(max_workers=12) as executor:
                     executor.map(process_ballot, batch)
-                batch_count += 1
+            batch_count += 1
     except Exception as e:
         print(e)
 
-# print(len(BU_FILES))
+print(len(BU_FILES))
+
+ballot_count_total = 0
 
 # for state_code in state_codes:
-#     calculate_state_ballot_report(state_code)
+#     subtotal = calculate_state_ballot_report(state_code)
+#     ballot_count_total += subtotal
+
+print(f"total ballots in 2022: {ballot_count_total}")
 
 
 finish_time = datetime.now()
