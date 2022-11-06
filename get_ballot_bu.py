@@ -56,13 +56,10 @@ def calculate_state_ballot_report(state_code:str)-> list:
     councils  = state_data["abr"][0]["mu"]
 
     for council in councils:
-        # mu_cd = council["cd"]
         zones = council["zon"]
         for zone in zones:
-            # zone_cd = zone["cd"]
             sections = zone["sec"]
             for section in sections:
-                # section_cd = section["ns"]
                 total_ballots += 1
     
     print("###############")
@@ -157,46 +154,46 @@ def create_batches(batch_size:int, ballots:list)-> list:
 def get_reminder_ballots(batch:list)->list:
     return [ballot for ballot in batch if get_bu_file_name(ballot) not in BU_FILES]
 
-state_codes = [s for s in states.keys()]
 
-start_time = datetime.now()
+if __name__ == "__main__":
 
+    state_codes = [s for s in states.keys()]
+    start_time = datetime.now()
 
-# # # download BUs from site
+    # # # download BUs from site
 
-for state_code in state_codes[7:8]:
-    try:
-        print(f"processing state_code: {state_code}")
-        ballots = get_state_ballot_codes(state_code)
-        batches = create_batches(200, ballots)
-        batch_count = 1
-        for batch in batches:
-            ballots_to_process = get_reminder_ballots(batch)
-            # print(len(ballots_to_process))
-            if len(ballots_to_process) > 0:
-                print(f"processing batch {batch_count}/{len(batches)} ")
-                with cf.ThreadPoolExecutor(max_workers=12) as executor:
-                    executor.map(process_ballot, batch)
-            batch_count += 1
-    except Exception as e:
-        print(e)
+    for state_code in state_codes[12:13]:
+        state_code = "RO"
+        try:
+            print(f"processing state_code: {state_code}")
+            ballots = get_state_ballot_codes(state_code)
+            batches = create_batches(200, ballots)
+            batch_count = 1
+            for batch in batches:
+                ballots_to_process = get_reminder_ballots(batch)
+                # print(len(ballots_to_process))
+                if len(ballots_to_process) > 0:
+                    print(f"processing batch {batch_count}/{len(batches)} ")
+                    # with cf.ThreadPoolExecutor(max_workers=12) as executor:
+                    #     executor.map(process_ballot, batch)
+                batch_count += 1
+        except Exception as e:
+            print(e)
 
-print(len(BU_FILES))
+    print(len(BU_FILES))
 
-ballot_count_total = 0
+    ballot_count_total = 0
 
-# for state_code in state_codes:
-#     subtotal = calculate_state_ballot_report(state_code)
-#     ballot_count_total += subtotal
+    # for state_code in state_codes:
+    #     subtotal = calculate_state_ballot_report(state_code)
+    #     ballot_count_total += subtotal
+    # print(f"total ballots in 2022: {ballot_count_total}")
 
-print(f"total ballots in 2022: {ballot_count_total}")
+    finish_time = datetime.now()
 
+    total_time = finish_time - start_time
 
-finish_time = datetime.now()
-
-total_time = finish_time - start_time
-
-print(f"execution took {total_time.seconds} seconds")
+    print(f"execution took {total_time.seconds} seconds")
 
 
 

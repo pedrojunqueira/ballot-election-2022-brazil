@@ -1,5 +1,4 @@
 from pathlib import Path
-import json
 
 import asn1tools as asn
 
@@ -7,9 +6,8 @@ BASE_DIR = Path(".").resolve()
 
 bu_path = BASE_DIR / "bu"
 
-BU_FILES = [ i.name for i in bu_path.iterdir() if i.suffix == '.bu']
 
-print(type(BU_FILES[0]))
+BU_FILES = [ i.name for i in bu_path.iterdir() if i.suffix == '.bu']
 
 asn1_paths = "./spec/bu.asn1"
 
@@ -17,9 +15,9 @@ conv = asn.compile_files(asn1_paths, codec="ber")
 
 counter = 0
 
-for file in BU_FILES:
+for file in BU_FILES[:10]:
     try:
-        with open(f"./bu/{file}", 'rb') as fp:
+        with open( bu_path / file , 'rb') as fp:
             data = bytearray(fp.read())
 
         envelope_decoded = conv.decode("EntidadeEnvelopeGenerico", data)
@@ -53,12 +51,6 @@ for file in BU_FILES:
                                         else:
                                             print(f"{vote_type} got {qty} votes ")
                     print()
-
-
-
-
-
-
     except Exception as e:
         counter +=1
         print(file)
