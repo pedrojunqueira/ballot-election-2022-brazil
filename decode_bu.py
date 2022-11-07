@@ -150,15 +150,11 @@ if __name__ == "__main__":
 
                 bu_decoded = decode_bu(file_name)
 
-                # state_ballot_table_row_data = extract_header(bu_decoded, state_ballot_table_row_data)
-                # state_ballot_table_row_data = extract_ballot_info(bu_decoded, state_ballot_table_row_data)
-                # state_ballot_table_row_data = extract_issue_date_time(bu_decoded, state_ballot_table_row_data)
-
                 results = extract_ballot_results(bu_decoded)
                 state_votes_table_row_data = process_results(results, ballot_id, state_votes_table_row_data)
             except Exception as err:
                 print(err)
-                ballots_with_decoding_issues.append(file_name)
+                ballots_with_decoding_issues.append(ballot)
     
         state_ballot_df = pd.DataFrame(state_ballot_table_row_data)
         state_ballot_df.to_csv(ballot_metadata_path / f"{state}_state_ballot_metadata.csv", index=False)
