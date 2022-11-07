@@ -2,8 +2,6 @@
 
 What motivated me to download all Ballot Data (Boletin the Urna - BU) is the controversy about the legitimacy of the election results.
 
-There is certainly a lot of fake new.
-
 I am making available all the ballot data (BU) files and data that I could download so far.
 
 It was downloaded from the TSE website [resultados.tse.jus.br](resultados.tse.jus.br)
@@ -30,11 +28,13 @@ There was a brief analysis I have done with the data in Jupyter notebook.
 
 see `notebook` folder.
 
-I could not find any ballot with a candidate with zero votes where I saw some people claiming in on the internet. Which may be fake news.
+I could find 141 ballot with zero votes for Bolsonaro and 4 with zero votes for Lula.
 
 Also there is a .csv version where you can load in excel if you are not familiar with python.
 
 `total_votes_president.csv`
+
+If anyone with statistic knowledge who wants to analyze the data more thoroughly please feel free.
 
 ## TSE technical documentation
 
