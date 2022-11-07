@@ -2,19 +2,19 @@
 
 What motivated me to download all Ballot Data (Boletin the Urna - BU) is the controversy about the legitimacy of the election results.
 
-What is out there is certainly a lot of fake new.
+There is certainly a lot of fake new.
 
-What I will make available are all the ballot data (BU).
+I am making available all the ballot data (BU) files and data that I could download so far.
 
 It was downloaded from the TSE website [resultados.tse.jus.br](resultados.tse.jus.br)
 
 Python programming language was used to download and analyze the data and I made it available in a PUBLIC FOLDER folder that I made public to anyone.
 
-So you do not need to download the files it self. Took me a few days. In beginning I was using thread to download but I was getting a rate of 4 BUs per second. Later I developed a new scrip that download asynchronously with a rate of about 20 BUs per second. 
+So you do not need to download the files yourself. Took me a few days. In beginning I was using thread to download but I was getting a rate of 4 BUs per second. Later I developed a new scrip that download asynchronously with a rate of about 20 BUs + per second. I would not recommend to use a too high rate not to reach rate limit and get your ip blocked to make requests to tse server. 
 
-Se the asynchronous script `async_get_ballot_bu.py` 
+Se the asynchronous script `async_get_ballot_bu.py` for more information. 
 
-There is a total of 464,401 in this election including 28 States.
+There is a total of 464,401 ballots in this election I downloaded.
 
 According to the TSE site there are [472.075](https://www.tse.jus.br/comunicacao/noticias/2022/Outubro/eleitores-comecam-a-votar-nas-mais-de-472-mil-secoes-eleitorais-espalhadas-pelo-brasil) section (ballots) 
 
@@ -22,15 +22,19 @@ So I am missing 9,674 ... I will investigate where are them in my list.
 
 To have access to the data downloaded you can access in this [container](https://storage4223.blob.core.windows.net/bu-elections-2022)
 
-There are 95 ballots I was not able to decode.
+There are 95 ballots I was not able to decode. found in `bu_not_able_decode.csv`
 
 ## Analysis
 
 There was a brief analysis I have done with the data in Jupyter notebook.
 
+see `notebook` folder.
+
 I could not find any ballot with a candidate with zero votes where I saw some people claiming in on the internet. Which may be fake news.
 
 Also there is a .csv version where you can load in excel if you are not familiar with python.
+
+`total_votes_president.csv`
 
 ## TSE technical documentation
 
