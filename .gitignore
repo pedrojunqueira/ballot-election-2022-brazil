@@ -5,5 +5,4 @@ state_ballots
 .DS_Store
 ECPy
 __pycache__
-async_get_ballot_bu.py
 results_csv
