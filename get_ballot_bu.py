@@ -162,8 +162,7 @@ if __name__ == "__main__":
 
     # # # download BUs from site
 
-    for state_code in state_codes[12:13]:
-        state_code = "RO"
+    for state_code in state_codes:
         try:
             print(f"processing state_code: {state_code}")
             ballots = get_state_ballot_codes(state_code)
@@ -174,8 +173,8 @@ if __name__ == "__main__":
                 # print(len(ballots_to_process))
                 if len(ballots_to_process) > 0:
                     print(f"processing batch {batch_count}/{len(batches)} ")
-                    # with cf.ThreadPoolExecutor(max_workers=12) as executor:
-                    #     executor.map(process_ballot, batch)
+                    with cf.ThreadPoolExecutor(max_workers=12) as executor:
+                        executor.map(process_ballot, batch)
                 batch_count += 1
         except Exception as e:
             print(e)
@@ -184,10 +183,10 @@ if __name__ == "__main__":
 
     ballot_count_total = 0
 
-    # for state_code in state_codes:
-    #     subtotal = calculate_state_ballot_report(state_code)
-    #     ballot_count_total += subtotal
-    # print(f"total ballots in 2022: {ballot_count_total}")
+    for state_code in state_codes:
+        subtotal = calculate_state_ballot_report(state_code)
+        ballot_count_total += subtotal
+    print(f"total ballots in 2022: {ballot_count_total}")
 
     finish_time = datetime.now()
 
