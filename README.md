@@ -12,11 +12,9 @@ So you do not need to download the files yourself. Took me a few days. In beginn
 
 Se the asynchronous script `async_get_ballot_bu.py` for more information. 
 
-There is a total of 464,401 ballots in this election I downloaded.
+There is a total of 472.075 ballots in this election I downloaded.
 
 According to the TSE site there are [472.075](https://www.tse.jus.br/comunicacao/noticias/2022/Outubro/eleitores-comecam-a-votar-nas-mais-de-472-mil-secoes-eleitorais-espalhadas-pelo-brasil) section (ballots) 
-
-So I am missing 9,674 ... I will investigate where are them in my list.
 
 To have access to the data downloaded you can access in this [container](https://storage4223.blob.core.windows.net/bu-elections-2022)
 

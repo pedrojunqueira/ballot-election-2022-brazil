@@ -129,7 +129,7 @@ if __name__ == '__main__':
     with open("brazil-states.json", "r") as fp:
         states = json.load(fp)
         state_codes = [s for s in states.keys()]
-    for state in state_codes[12:13]:
+    for state in state_codes[20:21]:
         print(state)
         begin = perf_counter()
         st_ballots = get_state_ballot_codes(state)

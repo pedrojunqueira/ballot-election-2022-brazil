@@ -26,6 +26,7 @@ states = {
             "PI": "Piauí",
             "RJ": "Rio de Janeiro",
             "RS": "Rio Grande do Sul",
+            "RN": "Rio Grande do Norte",
             "RO": "Rondônia",
             "RR": "Roraima",
             "SC": "Santa Catarina",
@@ -160,24 +161,24 @@ if __name__ == "__main__":
     state_codes = [s for s in states.keys()]
     start_time = datetime.now()
 
-    # # # download BUs from site
+    # # download BUs from site
 
-    for state_code in state_codes:
-        try:
-            print(f"processing state_code: {state_code}")
-            ballots = get_state_ballot_codes(state_code)
-            batches = create_batches(200, ballots)
-            batch_count = 1
-            for batch in batches:
-                ballots_to_process = get_reminder_ballots(batch)
-                # print(len(ballots_to_process))
-                if len(ballots_to_process) > 0:
-                    print(f"processing batch {batch_count}/{len(batches)} ")
-                    with cf.ThreadPoolExecutor(max_workers=12) as executor:
-                        executor.map(process_ballot, batch)
-                batch_count += 1
-        except Exception as e:
-            print(e)
+    # for state_code in state_codes[20:21]:
+    #     try:
+    #         print(f"processing state_code: {state_code}")
+    #         ballots = get_state_ballot_codes(state_code)
+    #         batches = create_batches(200, ballots)
+    #         batch_count = 1
+    #         for batch in batches:
+    #             ballots_to_process = get_reminder_ballots(batch)
+    #             # print(len(ballots_to_process))
+    #             if len(ballots_to_process) > 0:
+    #                 print(f"processing batch {batch_count}/{len(batches)} ")
+    #                 # with cf.ThreadPoolExecutor(max_workers=12) as executor:
+    #                 #     executor.map(process_ballot, batch)
+    #             batch_count += 1
+    #     except Exception as e:
+    #         print(e)
 
     print(len(BU_FILES))
 
@@ -191,6 +192,9 @@ if __name__ == "__main__":
     finish_time = datetime.now()
 
     total_time = finish_time - start_time
+
+    # with open("brazil-states.json", "w+") as fp:
+    #     json.dump(states, fp)
 
     print(f"execution took {total_time.seconds} seconds")
 
