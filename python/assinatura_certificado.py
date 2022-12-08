@@ -34,7 +34,7 @@ def main():
         description="Le o arquivo de assinaturas da Urna Eletrônica (UE) e extrai o certificado",
         formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("-a", "--asn1", nargs="+", required=True,
-                        help="Caminho para o arquivo de especificação asn1 das assinaturas")
+                        help="Caminho para o arquivo de especificação asn1 das assinaturas.")
     parser.add_argument("-s", "--assinatura", type=str, required=True,
                         help="Caminho para o arquivo de assinatura originado na UE")
     parser.add_argument("-o", "--output", type=str, required=True,
